@@ -48,17 +48,29 @@ builder.Services.AddScoped<IMapper, Mapper>();
 // ========================================
 // 4. CONFIGURAR REPOSITORIOS ✅
 // ========================================
+// Registrar el repositorio genérico base
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+// Registrar los repositorios específicos
 builder.Services.AddScoped<IUserRepository, UserRespository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 // ========================================
-// 5. CONFIGURAR SERVICIOS ✅
+// 5. CONFIGURAR VALIDADORES ✅
+// ========================================
+builder.Services.AddScoped<CreateUserValidator>();
+builder.Services.AddScoped<UpdateUserValidator>();
+builder.Services.AddScoped<CreateTaskDtoValidator>();
+builder.Services.AddScoped<UpdateTaskDtoValidator>();
+
+// ========================================
+// 6. CONFIGURAR SERVICIOS ✅
 // ========================================
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 
 // ========================================
-// 6. CONFIGURAR CORS (Opcional)
+// 7. CONFIGURAR CORS (Opcional)
 // ========================================
 builder.Services.AddCors(options =>
 {

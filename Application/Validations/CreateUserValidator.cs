@@ -6,7 +6,7 @@ namespace Application.Validations;
 
 public class CreateUserValidator : AbstractValidator<CreateUserDto>
 {
-    CreateUserValidator()
+    public CreateUserValidator()
     {
         RuleFor(x => x.Email).NotEmpty().EmailAddress().WithMessage("The email address is required.");
         RuleFor(x => x.Password).NotEmpty().NotNull()

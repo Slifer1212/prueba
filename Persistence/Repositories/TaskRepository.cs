@@ -35,4 +35,17 @@ public class TaskRepository : BaseRepository<TodoTask>, ITaskRepository
     {
         return await _entities.Where(e => e.UserId == userId).ToListAsync(cancellationToken);
     }
+
+    public async Task<bool> MarkTaskAsCompletedAsync(int id, CancellationToken cancellationToken = default)
+    {
+        var entity = await _entities.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+    
+        if (entity == null)
+            return false;
+    
+        entity.Completed = true;
+        _entities.Update(entity);
+    
+        return true;
+    }
 }

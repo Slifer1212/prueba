@@ -32,25 +32,27 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
     {
         await _entities.AddAsync(entity ,  cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
         Logger?.LogInformation($"Added entity: {entity.Id}");
     }
 
-    public void Update(T entity)
+    public async Task<T?> UpdateAsync(T entity, CancellationToken cancellationToken = default)
     {
-        _entities.Update(entity);
-        Logger.LogInformation("Entity was updated");
+       _entities.Update(entity);
+       await _context.SaveChangesAsync(cancellationToken);
+       Logger?.LogInformation("Entity was updated");
+       return entity;
     }
 
-    public void Delete(int id)
+    public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
-        var entity = _entities.Find(id);
-
+        var entity = await _entities.FindAsync(id, cancellationToken);
         if (entity == null)
         {
-            Logger.LogError($"Entity with id: {id} not found");
+            Logger.LogWarning($"Entity with Id: {id} was not found");
             return;
         }
-        
         _entities.Remove(entity);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

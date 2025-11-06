@@ -10,4 +10,12 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="BCrypt" Version="1.0.0" />
+      <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+      <PackageReference Include="FluentValidation" Version="12.1.0" />
+      <PackageReference Include="Mapster" Version="9.0.0-pre01" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    </ItemGroup>
+
 </Project>

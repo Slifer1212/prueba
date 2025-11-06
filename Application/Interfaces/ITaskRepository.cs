@@ -10,6 +10,8 @@ public interface ITaskRepository : IBaseRepository<TodoTask>
 
     Task<List<TodoTask>> GetOrderTasksByPriorityAsync(
         CancellationToken cancellationToken = default); 
-        Task <List<TodoTask>> GetTaskByUserAsync(int userId, CancellationToken cancellationToken = default);
+    Task <List<TodoTask>> GetTaskByUserAsync(int userId, CancellationToken cancellationToken = default);
+    
+    Task<bool> MarkTaskAsCompletedAsync(int id, CancellationToken cancellationToken = default);
     
 }

@@ -1,6 +1,7 @@
 using Application.IServices;
 using Application.Interfaces;
 using Application.Services;
+using Application.Validations;
 using Microsoft.EntityFrameworkCore;
 using Persistence.DbContext;
 using Persistence.Repositories;
